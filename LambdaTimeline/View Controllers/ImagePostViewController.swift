@@ -31,29 +31,48 @@ class ImagePostViewController: ShiftableViewController {
         
         setImageViewHeight(with: image.ratio)
         
-        imageView.image = image
+        imageView.image = originalImage
         
         chooseImageButton.setTitle("", for: [])
     }
     
+    func updateImage() {
+        if let originalImage = originalImage {
+            imageView.image = image(byFiltering: originalImage)
+        }
+    }
+    
+    private func image(byFiltering image: UIImage) -> UIImage {
+        guard let cgImage = image.cgImage else { return image }
+        let ciImage = CIImage(cgImage: cgImage)
+        exposureFilter.setValue(ciImage, forKey: "inputImage")
+        exposureFilter.setValue(exposureSlider.value, forKey: "inputEV")
+        guard let exposureCIImage = exposureFilter.outputImage else { return image }
+        sepiaFilter.setValue(exposureCIImage, forKey: "inputImage")
+        sepiaFilter.setValue(sepiaSlider.value, forKey: "inputIntensity")
+        guard let outputCIImage = sepiaFilter.outputImage else { return image }
+        guard let outputCGImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return image }
+        return UIImage(cgImage: outputCGImage)
+    }
+    
     @IBAction func exposureValueChanged(_ sender: Any) {
-        updateViews()
+        updateImage()
     }
     
     @IBAction func sepiaValueChanged(_ sender: Any) {
-        updateViews()
+        updateImage()
     }
     
     @IBAction func vibranceValueChanged(_ sender: Any) {
-        updateViews()
+        updateImage()
     }
     
     @IBAction func monoValueChanged(_ sender: Any) {
-        updateViews()
+        updateImage()
     }
     
     @IBAction func vignetteValueChanged(_ sender: Any) {
-        updateViews()
+        updateImage()
     }
     
     private func presentImagePickerController() {
@@ -135,6 +154,18 @@ class ImagePostViewController: ShiftableViewController {
     var postController: PostController!
     var post: Post?
     var imageData: Data?
+    var originalImage: UIImage? {
+        didSet {
+            updateImage()
+        }
+    }
+    
+    let exposureFilter = CIFilter(name: "CIExposureAdjust")!
+    let sepiaFilter = CIFilter(name: "CISepiaTone")!
+    let vibranceFilter = CIFilter(name: "CIVibrance")!
+    let monoFilter = CIFilter(name: "CIPhotoEffectMono")!
+    let vignetteFilter = CIFilter(name: "CIVignette")!
+    let context = CIContext(options: nil)
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -160,7 +191,7 @@ extension ImagePostViewController: UIImagePickerControllerDelegate, UINavigation
         
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         
-        imageView.image = image
+        originalImage = image
         
         setImageViewHeight(with: image.ratio)
     }
