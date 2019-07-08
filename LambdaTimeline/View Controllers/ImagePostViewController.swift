@@ -36,6 +36,26 @@ class ImagePostViewController: ShiftableViewController {
         chooseImageButton.setTitle("", for: [])
     }
     
+    @IBAction func exposureValueChanged(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func sepiaValueChanged(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func vibranceValueChanged(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func monoValueChanged(_ sender: Any) {
+        updateViews()
+    }
+    
+    @IBAction func vignetteValueChanged(_ sender: Any) {
+        updateViews()
+    }
+    
     private func presentImagePickerController() {
         
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
@@ -121,6 +141,13 @@ class ImagePostViewController: ShiftableViewController {
     @IBOutlet weak var chooseImageButton: UIButton!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var postButton: UIBarButtonItem!
+    
+    @IBOutlet weak var exposureSlider: UISlider!
+    @IBOutlet weak var sepiaSlider: UISlider!
+    @IBOutlet weak var vibranceSlider: UISlider!
+    @IBOutlet weak var monoSlider: UISlider!
+    @IBOutlet weak var vignetteSlider: UISlider!
+    
 }
 
 extension ImagePostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
