@@ -50,8 +50,18 @@ class ImagePostViewController: ShiftableViewController {
         guard let exposureCIImage = exposureFilter.outputImage else { return image }
         sepiaFilter.setValue(exposureCIImage, forKey: "inputImage")
         sepiaFilter.setValue(sepiaSlider.value, forKey: "inputIntensity")
-        guard let outputCIImage = sepiaFilter.outputImage else { return image }
-        guard let outputCGImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return image }
+        guard let sepiaCIImage = sepiaFilter.outputImage else { return image }
+        vibranceFilter.setValue(sepiaCIImage, forKey: "inputImage")
+        vibranceFilter.setValue(vibranceSlider.value, forKey: "inputAmount")
+        guard let vibranceCIImage = vibranceFilter.outputImage else { return image }
+        monoFilter.setValue(vibranceCIImage, forKey: "inputImage")
+        monoFilter.setValue(monoSlider, forKey: "inputSharpness")
+        guard let monoCIImage = monoFilter.outputImage else { return image }
+        vignetteFilter.setValue(monoCIImage, forKey: "inputImage")
+        vignetteFilter.setValue(vignetteSlider.value, forKey: "inputRadius")
+        vignetteFilter.setValue(vignetteSlider.value, forKey: "inputIntensity")
+        guard let vignetteCIImage = vignetteFilter.outputImage else { return image }
+        guard let outputCGImage = context.createCGImage(vignetteCIImage, from: vignetteCIImage.extent) else { return image }
         return UIImage(cgImage: outputCGImage)
     }
     
@@ -163,7 +173,7 @@ class ImagePostViewController: ShiftableViewController {
     let exposureFilter = CIFilter(name: "CIExposureAdjust")!
     let sepiaFilter = CIFilter(name: "CISepiaTone")!
     let vibranceFilter = CIFilter(name: "CIVibrance")!
-    let monoFilter = CIFilter(name: "CIPhotoEffectMono")!
+    let monoFilter = CIFilter(name: "CISharpenLuminance")!
     let vignetteFilter = CIFilter(name: "CIVignette")!
     let context = CIContext(options: nil)
     
