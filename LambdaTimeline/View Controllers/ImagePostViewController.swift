@@ -54,10 +54,10 @@ class ImagePostViewController: ShiftableViewController {
         vibranceFilter.setValue(sepiaCIImage, forKey: "inputImage")
         vibranceFilter.setValue(vibranceSlider.value, forKey: "inputAmount")
         guard let vibranceCIImage = vibranceFilter.outputImage else { return image }
-        monoFilter.setValue(vibranceCIImage, forKey: "inputImage")
-        monoFilter.setValue(monoSlider, forKey: "inputSharpness")
-        guard let monoCIImage = monoFilter.outputImage else { return image }
-        vignetteFilter.setValue(monoCIImage, forKey: "inputImage")
+        sharpenFilter.setValue(vibranceCIImage, forKey: "inputImage")
+        sharpenFilter.setValue(sharpenSlider.value, forKey: "inputSharpness")
+        guard let sharpenCIImage = sharpenFilter.outputImage else { return image }
+        vignetteFilter.setValue(sharpenCIImage, forKey: "inputImage")
         vignetteFilter.setValue(vignetteSlider.value, forKey: "inputRadius")
         vignetteFilter.setValue(vignetteSlider.value, forKey: "inputIntensity")
         guard let vignetteCIImage = vignetteFilter.outputImage else { return image }
@@ -77,7 +77,7 @@ class ImagePostViewController: ShiftableViewController {
         updateImage()
     }
     
-    @IBAction func monoValueChanged(_ sender: Any) {
+    @IBAction func sharpenValueChanged(_ sender: Any) {
         updateImage()
     }
     
@@ -173,7 +173,7 @@ class ImagePostViewController: ShiftableViewController {
     let exposureFilter = CIFilter(name: "CIExposureAdjust")!
     let sepiaFilter = CIFilter(name: "CISepiaTone")!
     let vibranceFilter = CIFilter(name: "CIVibrance")!
-    let monoFilter = CIFilter(name: "CISharpenLuminance")!
+    let sharpenFilter = CIFilter(name: "CISharpenLuminance")!
     let vignetteFilter = CIFilter(name: "CIVignette")!
     let context = CIContext(options: nil)
     
@@ -186,7 +186,7 @@ class ImagePostViewController: ShiftableViewController {
     @IBOutlet weak var exposureSlider: UISlider!
     @IBOutlet weak var sepiaSlider: UISlider!
     @IBOutlet weak var vibranceSlider: UISlider!
-    @IBOutlet weak var monoSlider: UISlider!
+    @IBOutlet weak var sharpenSlider: UISlider!
     @IBOutlet weak var vignetteSlider: UISlider!
     
 }

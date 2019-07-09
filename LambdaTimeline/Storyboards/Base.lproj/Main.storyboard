@@ -167,7 +167,7 @@
                                                             <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-10" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="f9j-2N-Lbx">
                                                                 <rect key="frame" x="77.5" y="0.0" width="299.5" height="31"/>
                                                                 <connections>
-                                                                    <action selector="exposureValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="rza-FM-nIq"/>
+                                                                    <action selector="exposureValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="8l6-0F-ECl"/>
                                                                 </connections>
                                                             </slider>
                                                         </subviews>
@@ -184,7 +184,7 @@
                                                             <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1rm-qd-zmz">
                                                                 <rect key="frame" x="49" y="0.0" width="328" height="31"/>
                                                                 <connections>
-                                                                    <action selector="sepiaValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="qlH-kJ-KJc"/>
+                                                                    <action selector="sepiaValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="IxX-wo-1XD"/>
                                                                 </connections>
                                                             </slider>
                                                         </subviews>
@@ -201,7 +201,7 @@
                                                             <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="uys-tj-slT">
                                                                 <rect key="frame" x="74" y="0.0" width="303" height="31"/>
                                                                 <connections>
-                                                                    <action selector="vibranceValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="cgD-P8-yqb"/>
+                                                                    <action selector="vibranceValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="IUa-3F-YaD"/>
                                                                 </connections>
                                                             </slider>
                                                         </subviews>
@@ -215,10 +215,10 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="jdB-bN-mxZ">
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="hU9-OC-le2">
                                                                 <rect key="frame" x="70.5" y="0.0" width="306.5" height="31"/>
                                                                 <connections>
-                                                                    <action selector="monoValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="F8i-UH-TeL"/>
+                                                                    <action selector="sharpenValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="FvM-Bo-8la"/>
                                                                 </connections>
                                                             </slider>
                                                         </subviews>
@@ -235,7 +235,7 @@
                                                             <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="8Nl-vp-PeN">
                                                                 <rect key="frame" x="70.5" y="0.0" width="306.5" height="31"/>
                                                                 <connections>
-                                                                    <action selector="vignetteValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="Ei2-nJ-Cvc"/>
+                                                                    <action selector="vignetteValueChanged:" destination="1Aw-4e-BW2" eventType="valueChanged" id="c6c-qM-Z0z"/>
                                                                 </connections>
                                                             </slider>
                                                         </subviews>
@@ -274,15 +274,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chooseImageButton" destination="VxD-cu-jHT" id="KVs-no-MbU"/>
-                        <outlet property="exposureSlider" destination="f9j-2N-Lbx" id="TNf-sc-3Cx"/>
+                        <outlet property="exposureSlider" destination="f9j-2N-Lbx" id="758-Ao-XG5"/>
                         <outlet property="imageHeightConstraint" destination="MHD-wr-Gq9" id="HyG-8g-Ck1"/>
                         <outlet property="imageView" destination="4eK-5F-H5h" id="e7m-c5-Xhz"/>
-                        <outlet property="monoSlider" destination="jdB-bN-mxZ" id="jua-vf-6jW"/>
                         <outlet property="postButton" destination="hsH-Uv-tug" id="ZBn-KE-cpU"/>
-                        <outlet property="sepiaSlider" destination="1rm-qd-zmz" id="8lb-oh-03L"/>
+                        <outlet property="sepiaSlider" destination="1rm-qd-zmz" id="THF-St-4RT"/>
+                        <outlet property="sharpenSlider" destination="hU9-OC-le2" id="zDB-fR-LZ1"/>
                         <outlet property="titleTextField" destination="Op6-OA-6Ou" id="JEe-cj-4mv"/>
-                        <outlet property="vibranceSlider" destination="uys-tj-slT" id="qoR-5B-xJe"/>
-                        <outlet property="vignetteSlider" destination="8Nl-vp-PeN" id="zJf-Bb-Lwr"/>
+                        <outlet property="vibranceSlider" destination="uys-tj-slT" id="HKJ-My-fXx"/>
+                        <outlet property="vignetteSlider" destination="8Nl-vp-PeN" id="fG9-kV-lmu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXa-A2-VJT" userLabel="First Responder" sceneMemberID="firstResponder"/>
