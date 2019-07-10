@@ -92,3 +92,4 @@ class ImagePostDetailTableViewController: UITableViewController {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var imageViewAspectRatioConstraint: NSLayoutConstraint!
 }
+
