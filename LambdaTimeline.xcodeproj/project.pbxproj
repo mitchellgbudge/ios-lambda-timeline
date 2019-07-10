@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3DD8F69622D3D41100486C48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DD8F69522D3D41100486C48 /* GoogleService-Info.plist */; };
+		3DD8F6ED22D674D400486C48 /* AudioCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8F6EC22D674D400486C48 /* AudioCommentViewController.swift */; };
+		3DD8F6F022D6773D00486C48 /* AudioCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8F6EF22D6773D00486C48 /* AudioCommentTableViewCell.swift */; };
 		4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646377B216FDE4B00E7FF73 /* AppDelegate.swift */; };
 		46463781216FDE4B00E7FF73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4646377F216FDE4B00E7FF73 /* Main.storyboard */; };
 		46463783216FDE4C00E7FF73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46463782216FDE4C00E7FF73 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 		33A2B89DE9E21538434BD640 /* Pods-LambdaTimeline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LambdaTimeline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LambdaTimeline/Pods-LambdaTimeline.debug.xcconfig"; sourceTree = "<group>"; };
 		3DD8F69522D3D41100486C48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3DD8F6A222D4F38200486C48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3DD8F6EC22D674D400486C48 /* AudioCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentViewController.swift; sourceTree = "<group>"; };
+		3DD8F6EF22D6773D00486C48 /* AudioCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentTableViewCell.swift; sourceTree = "<group>"; };
 		46463778216FDE4B00E7FF73 /* LambdaTimeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaTimeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4646377B216FDE4B00E7FF73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46463780216FDE4B00E7FF73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +88,23 @@
 				5D2CCD6C68779B0A70AC37FA /* Pods-LambdaTimeline.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3DD8F6EB22D6747C00486C48 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				46CFE6F421707D0000E7FF73 /* ImagePostViewController.swift */,
+				46D571F72173FC2700E7FF73 /* ImagePostDetailTableViewController.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		3DD8F6EE22D674E900486C48 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				3DD8F6EC22D674D400486C48 /* AudioCommentViewController.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		4646376F216FDE4B00E7FF73 = {
@@ -162,8 +183,8 @@
 			children = (
 				46A0366C2170158900E7FF73 /* SignInViewController.swift */,
 				46A0366921700F5100E7FF73 /* PostsCollectionViewController.swift */,
-				46CFE6F421707D0000E7FF73 /* ImagePostViewController.swift */,
-				46D571F72173FC2700E7FF73 /* ImagePostDetailTableViewController.swift */,
+				3DD8F6EE22D674E900486C48 /* Audio */,
+				3DD8F6EB22D6747C00486C48 /* Image */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -172,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				46CFE7022171572600E7FF73 /* ImagePostCollectionViewCell.swift */,
+				3DD8F6EF22D6773D00486C48 /* AudioCommentTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,6 +273,7 @@
 				TargetAttributes = {
 					46463777216FDE4B00E7FF73 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -356,6 +379,7 @@
 				4646377C216FDE4B00E7FF73 /* AppDelegate.swift in Sources */,
 				46CFE6FD217154F500E7FF73 /* Networking.swift in Sources */,
 				46CFE6F521707D0000E7FF73 /* ImagePostViewController.swift in Sources */,
+				3DD8F6ED22D674D400486C48 /* AudioCommentViewController.swift in Sources */,
 				46CFE6FF2171556D00E7FF73 /* ConcurrentOperation.swift in Sources */,
 				46463790216FFD1B00E7FF73 /* Post.swift in Sources */,
 				46CFE6F32170757F00E7FF73 /* User+DictionaryRepresentation.swift in Sources */,
@@ -365,6 +389,7 @@
 				46CFE7032171572600E7FF73 /* ImagePostCollectionViewCell.swift in Sources */,
 				4646379C2170091A00E7FF73 /* PostController.swift in Sources */,
 				464637992170048900E7FF73 /* FirebaseConvertible.swift in Sources */,
+				3DD8F6F022D6773D00486C48 /* AudioCommentTableViewCell.swift in Sources */,
 				46A0366A21700F5100E7FF73 /* PostsCollectionViewController.swift in Sources */,
 				46D571F52173CF3E00E7FF73 /* UIImage+Ratio.swift in Sources */,
 				46463792216FFDD900E7FF73 /* Comment.swift in Sources */,
@@ -524,7 +549,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MItchellBudge.LambdaTimeline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -543,7 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MItchellBudge.LambdaTimeline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

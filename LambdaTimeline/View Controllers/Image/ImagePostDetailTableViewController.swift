@@ -41,7 +41,7 @@ class ImagePostDetailTableViewController: UITableViewController {
             commentTextField = textField
         }
         
-        let addCommentAction = UIAlertAction(title: "Add Comment", style: .default) { (_) in
+        let addCommentAction = UIAlertAction(title: "Add Text Comment", style: .default) { (_) in
             
             guard let commentText = commentTextField?.text else { return }
             
@@ -52,9 +52,15 @@ class ImagePostDetailTableViewController: UITableViewController {
             }
         }
         
+        let addAudioCommentAction = UIAlertAction(title: "Add Audio Comment", style: .default) { (_) in
+            let audioCommentViewController = self.storyboard?.instantiateViewController(withIdentifier: "AudioCommentViewController")
+            self.present(audioCommentViewController!, animated: true, completion: nil)
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(addCommentAction)
+        alert.addAction(addAudioCommentAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)

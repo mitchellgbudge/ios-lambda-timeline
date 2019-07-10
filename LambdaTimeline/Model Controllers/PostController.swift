@@ -13,23 +13,31 @@ import FirebaseStorage
 
 class PostController {
     
-    func createPost(with title: String, ofType mediaType: MediaType, mediaData: Data, ratio: CGFloat? = nil, completion: @escaping (Bool) -> Void = { _ in }) {
+    func createPost(with title: String,
+                    ofType mediaType: MediaType,
+                    mediaData: Data,
+                    ratio: CGFloat? = nil,
+                    completion: @escaping (Bool) -> Void = { _ in }) {
         
         guard let currentUser = Auth.auth().currentUser,
             let author = Author(user: currentUser) else { return }
         
-        store(mediaData: mediaData, mediaType: mediaType) { (mediaURL) in
+        let mediaID = UUID().uuidString
+        
+        let mediaRef = storageRef.child(mediaType.rawValue).child(mediaID)
+        
+        store(data: mediaData, at: mediaRef) { (mediaURL) in
             
             guard let mediaURL = mediaURL else { completion(false); return }
             
-            let imagePost = Post(title: title, mediaURL: mediaURL, ratio: ratio, author: author)
+            let post = Post(title: title, mediaURL: mediaURL, mediaType: mediaType, ratio: ratio, author: author)
             
-            self.postsRef.childByAutoId().setValue(imagePost.dictionaryRepresentation) { (error, ref) in
+            self.postsRef.childByAutoId().setValue(post.dictionaryRepresentation) { (error, ref) in
                 if let error = error {
                     NSLog("Error posting image post: \(error)")
                     completion(false)
                 }
-        
+                
                 completion(true)
             }
         }
@@ -45,7 +53,25 @@ class PostController {
         
         savePostToFirebase(post)
     }
-
+    
+    func addComment(with audioData: Data, to post: Post, completion: @escaping () -> Void) {
+        guard let currentUser = Auth.auth().currentUser,
+            let author = Author(user: currentUser) else { completion(); return }
+        
+        
+        let ref = storageRef.child("audioComment").child(UUID().uuidString)
+        
+        store(data: audioData, at: ref) { (url) in
+            let comment = Comment(author: author, audioURL: url)
+            
+            post.comments.append(comment)
+            
+            self.savePostToFirebase(post, completion: { (error) in
+                completion()
+            })
+        }
+    }
+    
     func observePosts(completion: @escaping (Error?) -> Void) {
         
         postsRef.observe(.value, with: { (snapshot) in
@@ -70,22 +96,20 @@ class PostController {
         }
     }
     
-    func savePostToFirebase(_ post: Post, completion: (Error?) -> Void = { _ in }) {
+    func savePostToFirebase(_ post: Post, completion: @escaping (Error?) -> Void = { _ in }) {
         
-        guard let postID = post.id else { return }
+        guard let postID = post.id else { completion(nil); return }
         
         let ref = postsRef.child(postID)
         
-        ref.setValue(post.dictionaryRepresentation)
+        ref.setValue(post.dictionaryRepresentation) { (error, _ ) in
+            completion(error)
+        }
     }
-
-    private func store(mediaData: Data, mediaType: MediaType, completion: @escaping (URL?) -> Void) {
+    
+    private func store(data: Data, at ref: StorageReference, completion: @escaping (URL?) -> Void) {
         
-        let mediaID = UUID().uuidString
-        
-        let mediaRef = storageRef.child(mediaType.rawValue).child(mediaID)
-        
-        let uploadTask = mediaRef.putData(mediaData, metadata: nil) { (metadata, error) in
+        let uploadTask = ref.putData(data, metadata: nil) { (metadata, error) in
             if let error = error {
                 NSLog("Error storing media data: \(error)")
                 completion(nil)
@@ -98,7 +122,7 @@ class PostController {
                 return
             }
             
-            mediaRef.downloadURL(completion: { (url, error) in
+            ref.downloadURL(completion: { (url, error) in
                 
                 if let error = error {
                     NSLog("Error getting download url of media: \(error)")
@@ -118,10 +142,10 @@ class PostController {
     }
     
     var posts: [Post] = []
+    
     let currentUser = Auth.auth().currentUser
     let postsRef = Database.database().reference().child("posts")
     
     let storageRef = Storage.storage().reference()
-    
-    
 }
+

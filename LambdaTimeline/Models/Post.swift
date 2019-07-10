@@ -15,10 +15,14 @@ enum MediaType: String {
 
 class Post {
     
-    init(title: String, mediaURL: URL, ratio: CGFloat? = nil, author: Author, timestamp: Date = Date()) {
+    static func ==(lhs: Post, rhs: Post) -> Bool {
+        return lhs.mediaURL == rhs.mediaURL
+    }
+    
+    init(title: String, mediaURL: URL, mediaType: MediaType, ratio: CGFloat? = nil, author: Author, timestamp: Date = Date()) {
         self.mediaURL = mediaURL
         self.ratio = ratio
-        self.mediaType = .image
+        self.mediaType = mediaType
         self.author = author
         self.comments = [Comment(text: title, author: author)]
         self.timestamp = timestamp
@@ -34,6 +38,7 @@ class Post {
             let timestampTimeInterval = dictionary[Post.timestampKey] as? TimeInterval,
             let captionDictionaries = dictionary[Post.commentsKey] as? [[String: Any]] else { return nil }
         
+        
         self.mediaURL = mediaURL
         self.mediaType = mediaType
         self.ratio = dictionary[Post.ratioKey] as? CGFloat
@@ -45,14 +50,14 @@ class Post {
     
     var dictionaryRepresentation: [String : Any] {
         var dict: [String: Any] = [Post.mediaKey: mediaURL.absoluteString,
-                Post.mediaTypeKey: mediaType.rawValue,
-                Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
-                Post.authorKey: author.dictionaryRepresentation,
-                Post.timestampKey: timestamp.timeIntervalSince1970]
+                                   Post.mediaTypeKey: mediaType.rawValue,
+                                   Post.commentsKey: comments.map({ $0.dictionaryRepresentation }),
+                                   Post.authorKey: author.dictionaryRepresentation,
+                                   Post.timestampKey: timestamp.timeIntervalSince1970]
         
-        guard let ratio = self.ratio else { return dict }
-        
-        dict[Post.ratioKey] = ratio
+        if let ratio = self.ratio {
+            dict[Post.ratioKey] = ratio
+        }
         
         return dict
     }
@@ -77,3 +82,4 @@ class Post {
     static private let timestampKey = "timestamp"
     static private let idKey = "id"
 }
+
